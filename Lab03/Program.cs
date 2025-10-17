@@ -22,6 +22,10 @@ builder.Services.AddScoped<GetBooksByPaginationHandler>();
 builder.Services.AddValidatorsFromAssemblyContaining<GetBooksByPaginationValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<UpdateBookValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateBookValidator>();
+builder.Services.AddScoped<GetBooksByAuthorHandler>();
+builder.Services.AddValidatorsFromAssemblyContaining<GetBooksByAuthorValidator>();
+builder.Services.AddScoped<GetBooksSortedByHandler>();
+builder.Services.AddValidatorsFromAssemblyContaining<GetBooksSortedByValidator>();
 
 var app = builder.Build();
 
@@ -57,6 +61,16 @@ app.MapGet("/allBooks", async (GetAllBooksHandler handler) =>
 app.MapGet("/books/{id:int}", async (int id, GetBookByIdHandler handler) =>
 {
     var request = new GetBookByIdRequest(id);
+    return await handler.Handle(request);
+});
+app.MapGet("/booksByAuthor", async (string author, GetBooksByAuthorHandler handler) =>
+{
+    var request = new GetBooksByAuthorRequest(author);
+    return await handler.Handle(request);
+});
+app.MapGet("/booksSortedBy", async (string sortedBy, GetBooksSortedByHandler handler) =>
+{
+    var request = new GetBooksSortedByRequest(sortedBy);
     return await handler.Handle(request);
 });
 

@@ -1,6 +1,7 @@
 using Lab03.Persistance;
 using Lab03.Requests;
 using Lab03.Validators;
+using Microsoft.EntityFrameworkCore;
 
 namespace Lab03.Handlers;
 
@@ -19,9 +20,11 @@ public class UpdateBookHandler(BookContext context)
         if (book == null)
             return Results.NotFound();
 
-        book = book with { Title = request.Title, Author = request.Author, Year = request.Year };
-        _context.Books.Update(book);
+        _context.Entry(book).State = EntityState.Detached;
+
+        var updatedBook = book with { Title = request.Title, Author = request.Author, Year = request.Year };
+        _context.Books.Update(updatedBook);
         await _context.SaveChangesAsync();
-        return Results.Ok(book);
+        return Results.Ok(updatedBook);
     }
 }
