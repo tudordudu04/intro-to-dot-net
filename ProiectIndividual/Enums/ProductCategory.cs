@@ -1,4 +1,4 @@
-namespace ProiectIndividual.Products;
+namespace ProiectIndividual.Enums;
 
 public enum ProductCategory
 {

@@ -1,15 +1,10 @@
 using ProiectIndividual.Persistance;
+using ProiectIndividual.Requests;
 
-namespace ProiectIndividual.Products;
+namespace ProiectIndividual.Handlers;
 
-public class DeleteProductHandler
+public class DeleteProductHandler(ProductManagementContext context)
 {
-    private readonly ProductManagementContext context;
-
-    public DeleteProductHandler(ProductManagementContext context)
-    {
-        this.context = context;
-    }
     public async Task<IResult> Handle(DeleteProductRequest request)
     {
         var product = await context.Products.FindAsync(request.Id);

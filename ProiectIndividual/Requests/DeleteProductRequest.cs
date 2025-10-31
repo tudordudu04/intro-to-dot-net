@@ -1,3 +1,3 @@
-namespace ProiectIndividual.Products;
+namespace ProiectIndividual.Requests;
 
 public record DeleteProductRequest(Guid Id);

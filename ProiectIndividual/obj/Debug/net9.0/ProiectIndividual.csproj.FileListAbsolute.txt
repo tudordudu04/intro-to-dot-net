@@ -159,3 +159,8 @@
 /home/dudu/DotNet/ProiectIndividual/obj/Debug/net9.0/ProiectIndividual.pdb
 /home/dudu/DotNet/ProiectIndividual/obj/Debug/net9.0/ProiectIndividual.genruntimeconfig.cache
 /home/dudu/DotNet/ProiectIndividual/obj/Debug/net9.0/ref/ProiectIndividual.dll
+/home/dudu/DotNet/ProiectIndividual/bin/Debug/net9.0/AutoMapper.dll
+/home/dudu/DotNet/ProiectIndividual/bin/Debug/net9.0/Microsoft.IdentityModel.Abstractions.dll
+/home/dudu/DotNet/ProiectIndividual/bin/Debug/net9.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/home/dudu/DotNet/ProiectIndividual/bin/Debug/net9.0/Microsoft.IdentityModel.Logging.dll
+/home/dudu/DotNet/ProiectIndividual/bin/Debug/net9.0/Microsoft.IdentityModel.Tokens.dll
