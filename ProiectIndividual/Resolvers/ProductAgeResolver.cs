@@ -9,31 +9,19 @@ public class ProductAgeResolver : IValueResolver<Product, ProductProfileDTO, str
     {
         var now = DateTime.UtcNow.Date;
         var release = source.ReleaseDate.Date;
-        if (release > now) return "Releases in the future";
+        if (release > now) return "future";
 
         var totalDays = (now - release).Days;
-
-        // Exact 5 years (1825 days) => "Classic"
-        if (totalDays == 1825) return "Classic";
-
-        if (totalDays < 30) return "New Release";
+        if (totalDays == 1825) return "classic";
+        if (totalDays < 30) return "new";
 
         if (totalDays < 365)
         {
             var months = Math.Max(1, (now.Year - release.Year) * 12 + now.Month - release.Month);
-            return $"{months} month{(months == 1 ? "" : "s")} old";
+            return $"{months}m";
         }
 
-        // < 1825 days (handled above for equality) => X years old
-        var years = (int)(totalDays / 365.0);
-        if (totalDays < 1825)
-        {
-            years = Math.Max(1, years);
-            return $"{years} year{(years == 1 ? "" : "s")} old";
-        }
-
-        // > 1825 days (more than 5 years): also show years
-        years = Math.Max(1, years);
-        return $"{years} year{(years == 1 ? "" : "s")} old";
+        var years = Math.Max(1, (int)(totalDays / 365.0));
+        return $"{years}y";
     }
 }
