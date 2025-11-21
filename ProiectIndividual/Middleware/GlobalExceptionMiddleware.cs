@@ -4,17 +4,8 @@ using ProiectIndividual.Exceptions;
 
 namespace ProiectIndividual.Middleware;
 
-public class GlobalExceptionMiddleware
+public class GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExceptionMiddleware> logger)
 {
-    private readonly RequestDelegate next;
-    private readonly ILogger<GlobalExceptionMiddleware> logger;
-
-    public GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExceptionMiddleware> logger)
-    {
-        this.next = next;
-        this.logger = logger;
-    }
-    
     public async Task InvokeAsync(HttpContext context)
     {
         try
@@ -44,14 +35,6 @@ public class GlobalExceptionMiddleware
                 };
                 statusCode = validationEx.StatusCode;
                 break;
-            
-            case ProductNotFoundException prodNotFoundEx:
-                errorResponse = new ErrorResponse(prodNotFoundEx.ErrorCode, prodNotFoundEx.Message)
-                {
-                    TraceId = context.TraceIdentifier
-                };
-                statusCode = prodNotFoundEx.StatusCode;
-                break;    
             
             case BaseException baseEx:
                 errorResponse = new ErrorResponse(baseEx.ErrorCode, baseEx.Message)
