@@ -79,9 +79,6 @@ public class CreateProductValidator : AbstractValidator<CreateProductProfileRequ
         {
             RuleFor(x => x.Price)
                 .LessThanOrEqualTo(200m).WithMessage("Home products must have a maximum price of $200.00.");
-
-            RuleFor(x => x.Name)
-                .Must(BeAppropriateForHome).WithMessage("Home product name contains restricted content.");
         });
 
         When(x => x.Category == ProductCategory.Clothing, () =>

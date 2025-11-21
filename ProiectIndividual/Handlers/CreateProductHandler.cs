@@ -36,7 +36,6 @@ public class CreateProductHandler(
             throw new Exceptions.ValidationException(errors);
         }
 
-        // sku uniqueness (explicit type)
         var skuExists = await op.TimeAsync<bool>("sku", () => context.Products.AnyAsync(p => p.SKU == request.SKU));
         op.LogSkuValidation(skuExists);
 
@@ -59,7 +58,6 @@ public class CreateProductHandler(
 
             op.LogDatabaseStarted(product.Id);
 
-            // time DB work, return bool to match TimeAsync\<T\>
             await op.TimeAsync<bool>("db", async () =>
             {
                 context.Products.Add(product);

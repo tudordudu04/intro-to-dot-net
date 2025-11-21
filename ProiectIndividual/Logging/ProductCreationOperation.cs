@@ -35,7 +35,6 @@ public sealed class ProductCreationOperation : IDisposable
         SKU = sku;
         Category = category;
 
-        // Safely create scope (mocked logger may return null)
         _scope = _logger.BeginScope(new Dictionary<string, object>
         {
             ["OperationId"] = OperationId,
